@@ -47,6 +47,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Agricultural custom colors
+        'soil-brown': "hsl(var(--soil-brown))",
+        'leaf-green': "hsl(var(--leaf-green))",
+        'harvest-gold': "hsl(var(--harvest-gold))",
+        'sky-blue': "hsl(var(--sky-blue))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

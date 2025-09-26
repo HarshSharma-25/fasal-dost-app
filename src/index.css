@@ -2,41 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Smart Crop Advisory System Design System - Earthy Agricultural Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Agricultural color palette */
+    --background: 48 20% 97%;
+    --foreground: 25 25% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 48 20% 98%;
+    --card-foreground: 25 25% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 48 20% 98%;
+    --popover-foreground: 25 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Rich agricultural green */
+    --primary: 120 40% 25%;
+    --primary-foreground: 48 20% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Warm earth brown */
+    --secondary: 30 35% 60%;
+    --secondary-foreground: 25 25% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 45 15% 92%;
+    --muted-foreground: 25 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Fresh crop green */
+    --accent: 100 45% 45%;
+    --accent-foreground: 48 20% 97%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 48 20% 97%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 45 20% 85%;
+    --input: 45 20% 90%;
+    --ring: 120 40% 25%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom agricultural tokens */
+    --soil-brown: 25 40% 35%;
+    --leaf-green: 120 50% 35%;
+    --harvest-gold: 45 85% 65%;
+    --sky-blue: 200 75% 60%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-earth: linear-gradient(180deg, hsl(var(--soil-brown)), hsl(var(--secondary)));
+    --gradient-crop: linear-gradient(90deg, hsl(var(--leaf-green)), hsl(var(--harvest-gold)));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 12px hsl(var(--primary) / 0.1);
+    --shadow-card: 0 8px 24px hsl(var(--soil-brown) / 0.15);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
