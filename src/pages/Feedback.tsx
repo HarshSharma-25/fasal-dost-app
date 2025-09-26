@@ -8,11 +8,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { MessageSquare, Mic, Star, Send } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,8 +61,8 @@ const Feedback = () => {
       
       <div className="container mx-auto px-4 py-6 max-w-4xl">
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-primary mb-2">आपकी राय</h1>
-          <p className="text-muted-foreground">हमारी सेवा को बेहतर बनाने के लिए अपनी राय दें</p>
+          <h1 className="text-3xl font-bold text-primary mb-2">{t('feedback.title')}</h1>
+          <p className="text-muted-foreground">{t('feedback.subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

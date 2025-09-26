@@ -14,20 +14,23 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 
 const Navigation = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useLanguage();
 
   const navItems = [
-    { path: "/", label: "होम", icon: Home, labelEn: "Home" },
-    { path: "/chat", label: "सलाह", icon: MessageCircle, labelEn: "Advisory" },
-    { path: "/soil", label: "मिट्टी", icon: Sprout, labelEn: "Soil" },
-    { path: "/weather", label: "मौसम", icon: CloudRain, labelEn: "Weather" },
-    { path: "/market", label: "बाजार", icon: TrendingUp, labelEn: "Market" },
-    { path: "/pest", label: "कीट", icon: Bug, labelEn: "Pest" },
-    { path: "/schemes", label: "योजना", icon: FileText, labelEn: "Schemes" },
-    { path: "/feedback", label: "राय", icon: MessageSquare, labelEn: "Feedback" },
+    { path: "/", icon: Home, key: "nav.home" },
+    { path: "/chat", icon: MessageCircle, key: "nav.advisory" },
+    { path: "/soil", icon: Sprout, key: "nav.soil" },
+    { path: "/weather", icon: CloudRain, key: "nav.weather" },
+    { path: "/market", icon: TrendingUp, key: "nav.market" },
+    { path: "/pest", icon: Bug, key: "nav.pest" },
+    { path: "/schemes", icon: FileText, key: "nav.schemes" },
+    { path: "/feedback", icon: MessageSquare, key: "nav.feedback" },
   ];
 
   return (
@@ -40,7 +43,7 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-1">
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
@@ -53,10 +56,11 @@ const Navigation = () => {
                   }`}
                 >
                   <Icon className="h-5 w-5" />
-                  <span className="text-xs mt-1">{item.labelEn}</span>
+                  <span className="text-xs mt-1">{t(item.key)}</span>
                 </Link>
               );
             })}
+            <LanguageToggle />
           </div>
 
           {/* Mobile Navigation */}
@@ -90,13 +94,13 @@ const Navigation = () => {
                       }`}
                     >
                       <Icon className="h-5 w-5" />
-                      <div className="flex flex-col">
-                        <span className="font-medium">{item.labelEn}</span>
-                        <span className="text-sm opacity-75">{item.label}</span>
-                      </div>
+                      <span className="font-medium">{t(item.key)}</span>
                     </Link>
                   );
                 })}
+                <div className="px-4 py-3">
+                  <LanguageToggle />
+                </div>
               </div>
             </SheetContent>
           </Sheet>

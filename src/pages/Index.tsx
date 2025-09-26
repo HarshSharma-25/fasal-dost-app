@@ -16,57 +16,60 @@ import {
   Mic
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
+  const { t } = useLanguage();
+
   const features = [
     {
       icon: MessageCircle,
-      title: "AI कृषि सलाहकार",
-      description: "24/7 उपलब्ध बुद्धिमान सलाहकार जो आपके सवालों का तुरंत जवाब देता है",
+      titleKey: "home.feature.aiAdvisor",
+      descriptionKey: "home.feature.aiAdvisorDesc",
       link: "/chat",
       color: "from-primary to-accent"
     },
     {
       icon: Sprout,
-      title: "मिट्टी और खाद सलाह",
-      description: "अपनी मिट्टी की जांच करें और सही खाद की व्यक्तिगत सिफारिश पाएं",
+      titleKey: "home.feature.soilAdvice",
+      descriptionKey: "home.feature.soilAdviceDesc",
       link: "/soil",
       color: "from-soil-brown to-secondary"
     },
     {
       icon: CloudRain,
-      title: "मौसम पूर्वानुमान",
-      description: "सटीक मौसम की जानकारी और कृषि के लिए विशेष सुझाव",
+      titleKey: "home.feature.weatherForecast",
+      descriptionKey: "home.feature.weatherForecastDesc",
       link: "/weather",
       color: "from-sky-blue to-accent"
     },
     {
       icon: TrendingUp,
-      title: "बाजार भाव",
-      description: "वर्तमान मंडी दरें और भविष्य के रुझान की जानकारी",
+      titleKey: "home.feature.marketPrices",
+      descriptionKey: "home.feature.marketPricesDesc",
       link: "/market",
       color: "from-harvest-gold to-secondary"
     },
     {
       icon: Bug,
-      title: "कीट पहचान",
-      description: "फोटो अपलोड करें और तुरंत कीट/रोग की पहचान और इलाज पाएं",
+      titleKey: "home.feature.pestIdentification",
+      descriptionKey: "home.feature.pestIdentificationDesc",
       link: "/pest",
       color: "from-leaf-green to-accent"
     },
     {
       icon: FileText,
-      title: "सरकारी योजनाएं",
-      description: "किसानों के लिए उपलब्ध सभी सरकारी योजनाओं की विस्तृत जानकारी",
+      titleKey: "home.feature.govSchemes",
+      descriptionKey: "home.feature.govSchemesDesc",
       link: "/schemes",
       color: "from-primary to-harvest-gold"
     }
   ];
 
   const stats = [
-    { number: "50,000+", label: "पंजीकृत किसान", icon: Users },
-    { number: "95%", label: "संतुष्ट उपयोगकर्ता", icon: Award },
-    { number: "12", label: "राज्यों में सेवा", icon: Globe },
+    { number: "50,000+", labelKey: "common.registered_farmers", icon: Users },
+    { number: "95%", labelKey: "common.satisfied_users", icon: Award },
+    { number: "12", labelKey: "common.states_served", icon: Globe },
   ];
 
   return (
@@ -79,26 +82,26 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-primary-foreground">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              स्मार्ट <span className="text-harvest-gold">कृषि सलाह</span> सिस्टम
+              {t('home.title')}
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">
-              AI तकनीक से लैस, किसानों के लिए बनाया गया एक संपूर्ण समाधान
+              {t('home.subtitle')}
             </p>
             <p className="text-lg mb-10 opacity-80">
-              फसल, मिट्टी, मौसम, बाजार - सब कुछ एक ही जगह। आसान भाषा में, आपकी सुविधा के अनुसार।
+              {t('home.description')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/chat">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4">
                   <MessageCircle className="mr-2 h-5 w-5" />
-                  सलाह शुरू करें
+                  {t('home.startAdvice')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-4">
                 <Smartphone className="mr-2 h-5 w-5" />
-                ऐप डाउनलोड करें
+                {t('home.downloadApp')}
               </Button>
             </div>
           </div>
@@ -116,7 +119,7 @@ const Index = () => {
                   <CardContent className="p-8">
                     <Icon className="h-12 w-12 mx-auto mb-4 text-primary" />
                     <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-                    <div className="text-muted-foreground">{stat.label}</div>
+                    <div className="text-muted-foreground">{t(stat.labelKey)}</div>
                   </CardContent>
                 </Card>
               );
@@ -130,10 +133,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-              आपकी खेती के लिए सबकुछ
+              {t('home.statsTitle')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              आधुनिक तकनीक और पारंपरिक ज्ञान का मेल, हर किसान की सफलता के लिए
+              {t('home.statsSubtitle')}
             </p>
           </div>
 
@@ -146,15 +149,15 @@ const Index = () => {
                     <CardHeader className={`bg-gradient-to-r ${feature.color} text-primary-foreground`}>
                       <div className="flex items-center gap-3">
                         <Icon className="h-8 w-8" />
-                        <CardTitle className="text-lg">{feature.title}</CardTitle>
+                        <CardTitle className="text-lg">{t(feature.titleKey)}</CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent className="p-6">
                       <p className="text-muted-foreground group-hover:text-foreground transition-smooth">
-                        {feature.description}
+                        {t(feature.descriptionKey)}
                       </p>
                       <div className="flex items-center mt-4 text-primary group-hover:translate-x-2 transition-smooth">
-                        <span className="mr-2">शुरू करें</span>
+                        <span className="mr-2">{t('common.start')}</span>
                         <ArrowRight className="h-4 w-4" />
                       </div>
                     </CardContent>
@@ -171,21 +174,20 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-primary mb-6">
-              हर किसान के लिए आसान
+              {t('home.easyForFarmers')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card className="shadow-soft">
                 <CardContent className="p-8">
                   <Globe className="h-12 w-12 mx-auto mb-4 text-primary" />
-                  <h3 className="text-xl font-semibold mb-3">बहुभाषी सपोर्ट</h3>
+                  <h3 className="text-xl font-semibold mb-3">{t('home.multilingualSupport')}</h3>
                   <p className="text-muted-foreground mb-4">
-                    हिंदी, मराठी, गुजराती, अंग्रेजी और अन्य स्थानीय भाषाओं में उपलब्ध
+                    {t('home.multilingualDesc')}
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">हिंदी</span>
-                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">मराठी</span>
                     <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">English</span>
-                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">गुजराती</span>
+                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">ਪੰਜਾਬੀ</span>
                   </div>
                 </CardContent>
               </Card>
@@ -193,13 +195,13 @@ const Index = () => {
               <Card className="shadow-soft">
                 <CardContent className="p-8">
                   <Mic className="h-12 w-12 mx-auto mb-4 text-primary" />
-                  <h3 className="text-xl font-semibold mb-3">आवाज सहायता</h3>
+                  <h3 className="text-xl font-semibold mb-3">{t('home.voiceSupport')}</h3>
                   <p className="text-muted-foreground mb-4">
-                    बोलकर सवाल पूछें और आवाज में जवाब सुनें। पढ़ना-लिखना न आए तो भी कोई समस्या नहीं
+                    {t('home.voiceSupportDesc')}
                   </p>
                   <Button className="bg-gradient-to-r from-primary to-accent">
                     <Mic className="mr-2 h-4 w-4" />
-                    आवाज में पूछें
+                    {t('home.askVoice')}
                   </Button>
                 </CardContent>
               </Card>
@@ -212,21 +214,21 @@ const Index = () => {
       <section className="py-20 bg-gradient-to-r from-primary to-accent text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            आज ही शुरू करें अपनी स्मार्ट खेती
+            {t('home.startSmartFarming')}
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            हजारों किसान भाई पहले से ही उपयोग कर रहे हैं। आप भी जुड़िए।
+            {t('home.joinThousands')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/chat">
               <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4">
                 <MessageCircle className="mr-2 h-5 w-5" />
-                अभी सलाह लें
+                {t('home.getAdviceNow')}
               </Button>
             </Link>
             <Link to="/feedback">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-4">
-                अपनी राय दें
+                {t('home.giveOpinion')}
               </Button>
             </Link>
           </div>
