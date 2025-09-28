@@ -2,8 +2,10 @@ import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, TrendingDown, Minus, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Market = () => {
+  const { t } = useLanguage();
   const marketData = [
     { crop: "गेहूं", price: 2250, change: 5, unit: "क्विंटल", location: "नागपुर मंडी" },
     { crop: "धान", price: 1850, change: -2, unit: "क्विंटल", location: "अकोला मंडी" },
@@ -31,8 +33,8 @@ const Market = () => {
       
       <div className="container mx-auto px-4 py-6 max-w-6xl">
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-primary mb-2">मंडी भाव</h1>
-          <p className="text-muted-foreground">आज के बाजार दर और रुझान</p>
+          <h1 className="text-3xl font-bold text-primary mb-2">{t('market.title')}</h1>
+          <p className="text-muted-foreground">{t('market.subtitle')}</p>
         </div>
 
         <div className="grid gap-4 mb-6">
@@ -71,22 +73,22 @@ const Market = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="shadow-card">
             <CardHeader className="bg-gradient-to-r from-primary to-accent text-primary-foreground">
-              <CardTitle>बाजार विश्लेषण</CardTitle>
+              <CardTitle>{t('market.marketAnalysis')}</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-4">
                 <div className="p-4 bg-muted rounded-lg">
-                  <h4 className="font-semibold mb-2">आज का सर्वोत्तम:</h4>
+                  <h4 className="font-semibold mb-2">{t('market.todaysBest')}</h4>
                   <p className="text-green-600 font-medium">कपास (+8%) - ₹6,200/क्विंटल</p>
                 </div>
                 
                 <div className="p-4 bg-muted rounded-lg">
-                  <h4 className="font-semibold mb-2">बेचने का सुझाव:</h4>
+                  <h4 className="font-semibold mb-2">{t('market.sellingSuggestion')}</h4>
                   <p className="text-sm">कपास और मक्का की कीमतें बढ़ रही हैं। अच्छा समय है बेचने के लिए।</p>
                 </div>
                 
                 <div className="p-4 bg-muted rounded-lg">
-                  <h4 className="font-semibold mb-2">खरीदने का सुझाव:</h4>
+                  <h4 className="font-semibold mb-2">{t('market.buyingSuggestion')}</h4>
                   <p className="text-sm">तुअर दाल की कीमत गिरी है। अगली फसल के लिए बीज खरीदने का अच्छा मौका।</p>
                 </div>
               </div>
@@ -95,7 +97,7 @@ const Market = () => {
 
           <Card className="shadow-card">
             <CardHeader className="bg-gradient-to-r from-harvest-gold to-secondary text-primary-foreground">
-              <CardTitle>सप्ताह का रुझान</CardTitle>
+              <CardTitle>{t('market.weeklyTrend')}</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-3">
@@ -118,7 +120,7 @@ const Market = () => {
               </div>
               
               <Button className="w-full mt-4 bg-gradient-to-r from-primary to-accent">
-                विस्तृत रिपोर्ट देखें
+                {t('market.detailedReport')}
               </Button>
             </CardContent>
           </Card>

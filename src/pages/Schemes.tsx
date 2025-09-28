@@ -4,8 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Bell, Calendar, ExternalLink, Heart } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Schemes = () => {
+  const { t } = useLanguage();
   const [favoriteSchemes, setFavoriteSchemes] = useState<number[]>([]);
 
   const schemes = [
@@ -82,15 +84,15 @@ const Schemes = () => {
       
       <div className="container mx-auto px-4 py-6 max-w-6xl">
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-primary mb-2">सरकारी योजनाएं</h1>
-          <p className="text-muted-foreground">किसानों के लिए उपलब्ध सरकारी योजनाओं की जानकारी</p>
+          <h1 className="text-3xl font-bold text-primary mb-2">{t('schemes.title')}</h1>
+          <p className="text-muted-foreground">{t('schemes.subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <Card className="shadow-soft">
             <CardContent className="p-6 text-center">
               <FileText className="h-8 w-8 mx-auto mb-3 text-primary" />
-              <h3 className="font-semibold mb-2">कुल योजनाएं</h3>
+              <h3 className="font-semibold mb-2">{t('schemes.totalSchemes')}</h3>
               <p className="text-2xl font-bold text-primary">{schemes.length}</p>
             </CardContent>
           </Card>
@@ -98,7 +100,7 @@ const Schemes = () => {
           <Card className="shadow-soft">
             <CardContent className="p-6 text-center">
               <Bell className="h-8 w-8 mx-auto mb-3 text-accent" />
-              <h3 className="font-semibold mb-2">सक्रिय योजनाएं</h3>
+              <h3 className="font-semibold mb-2">{t('schemes.activeSchemes')}</h3>
               <p className="text-2xl font-bold text-accent">
                 {schemes.filter(s => s.status === 'active').length}
               </p>
@@ -108,7 +110,7 @@ const Schemes = () => {
           <Card className="shadow-soft">
             <CardContent className="p-6 text-center">
               <Heart className="h-8 w-8 mx-auto mb-3 text-red-500" />
-              <h3 className="font-semibold mb-2">पसंदीदा</h3>
+              <h3 className="font-semibold mb-2">{t('schemes.favorites')}</h3>
               <p className="text-2xl font-bold text-red-500">{favoriteSchemes.length}</p>
             </CardContent>
           </Card>
@@ -141,17 +143,17 @@ const Schemes = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-semibold mb-2">विवरण:</h4>
+                      <h4 className="font-semibold mb-2">{t('schemes.description')}</h4>
                       <p className="text-sm text-muted-foreground">{scheme.description}</p>
                     </div>
 
                     <div>
-                      <h4 className="font-semibold mb-2">लाभ राशि:</h4>
+                      <h4 className="font-semibold mb-2">{t('schemes.benefitAmount')}</h4>
                       <p className="text-lg font-bold text-primary">{scheme.amount}</p>
                     </div>
 
                     <div>
-                      <h4 className="font-semibold mb-2">अंतिम तिथि:</h4>
+                      <h4 className="font-semibold mb-2">{t('schemes.deadline')}</h4>
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-muted-foreground" />
                         <p className="text-sm">{scheme.deadline}</p>
@@ -161,12 +163,12 @@ const Schemes = () => {
 
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-semibold mb-2">पात्रता:</h4>
+                      <h4 className="font-semibold mb-2">{t('schemes.eligibility')}</h4>
                       <p className="text-sm text-muted-foreground">{scheme.eligibility}</p>
                     </div>
 
                     <div>
-                      <h4 className="font-semibold mb-2">आवश्यक दस्तावेज:</h4>
+                      <h4 className="font-semibold mb-2">{t('schemes.requiredDocuments')}</h4>
                       <ul className="text-sm space-y-1">
                         {scheme.documents.map((doc, index) => (
                           <li key={index} className="flex items-center gap-2">
@@ -180,10 +182,10 @@ const Schemes = () => {
                     <div className="flex gap-2">
                       <Button className="flex-1 bg-gradient-to-r from-primary to-accent">
                         <ExternalLink className="h-4 w-4 mr-2" />
-                        आवेदन करें
+                        {t('schemes.apply')}
                       </Button>
                       <Button variant="outline" className="flex-1">
-                        विस्तार देखें
+                        {t('schemes.viewDetails')}
                       </Button>
                     </div>
                   </div>
@@ -197,13 +199,13 @@ const Schemes = () => {
           <CardHeader className="bg-gradient-to-r from-primary to-accent text-primary-foreground">
             <CardTitle className="flex items-center gap-2">
               <Bell className="h-6 w-6" />
-              अपडेट अलर्ट
+              {t('schemes.updateAlert')}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6">
             <p className="mb-4">नई योजनाओं और अपडेट की सूचना पाने के लिए अलर्ट सेटअप करें</p>
             <Button className="bg-gradient-to-r from-primary to-accent">
-              अलर्ट सक्रिय करें
+              {t('schemes.enableAlert')}
             </Button>
           </CardContent>
         </Card>

@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Bug, Camera, Upload, AlertCircle } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Pest = () => {
+  const { t } = useLanguage();
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [analysis, setAnalysis] = useState<any>(null);
 
@@ -45,8 +47,8 @@ const Pest = () => {
       
       <div className="container mx-auto px-4 py-6 max-w-4xl">
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-primary mb-2">कीट और रोग पहचान</h1>
-          <p className="text-muted-foreground">फसल की तस्वीर अपलोड करें और तुरंत समाधान पाएं</p>
+          <h1 className="text-3xl font-bold text-primary mb-2">{t('pest.title')}</h1>
+          <p className="text-muted-foreground">{t('pest.subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -54,7 +56,7 @@ const Pest = () => {
             <CardHeader className="bg-gradient-to-r from-primary to-accent text-primary-foreground">
               <CardTitle className="flex items-center gap-2">
                 <Camera className="h-6 w-6" />
-                तस्वीर अपलोड करें
+                {t('pest.uploadPhoto')}
               </CardTitle>
             </CardHeader>
             
@@ -72,16 +74,16 @@ const Pest = () => {
                         variant="outline" 
                         onClick={() => setUploadedImage(null)}
                       >
-                        नई तस्वीर अपलोड करें
+                        {t('pest.uploadNewPhoto')}
                       </Button>
                     </div>
                   ) : (
                     <div className="space-y-4">
                       <Upload className="h-12 w-12 mx-auto text-muted-foreground" />
                       <div>
-                        <p className="text-lg font-medium">तस्वीर अपलोड करें</p>
+                        <p className="text-lg font-medium">{t('pest.uploadPhoto')}</p>
                         <p className="text-sm text-muted-foreground">
-                          JPG, PNG या JPEG फॉर्मेट में (5MB तक)
+                          {t('pest.uploadInstructions')}
                         </p>
                       </div>
                       
@@ -89,7 +91,7 @@ const Pest = () => {
                         <Button className="bg-gradient-to-r from-primary to-accent" asChild>
                           <span className="cursor-pointer flex items-center gap-2">
                             <Camera className="h-4 w-4" />
-                            फ़ाइल चुनें
+                            {t('pest.chooseFile')}
                           </span>
                         </Button>
                       </Label>
@@ -105,7 +107,7 @@ const Pest = () => {
                 </div>
 
                 <div className="text-sm text-muted-foreground space-y-2">
-                  <p className="font-medium">बेहतर परिणाम के लिए:</p>
+                  <p className="font-medium">{t('pest.betterResults')}</p>
                   <ul className="list-disc list-inside space-y-1 ml-2">
                     <li>साफ और तेज तस्वीर लें</li>
                     <li>प्रभावित पत्ती या फसल का क्लोज-अप लें</li>
@@ -121,7 +123,7 @@ const Pest = () => {
               <CardHeader className="bg-gradient-to-r from-leaf-green to-harvest-gold text-primary-foreground">
                 <CardTitle className="flex items-center gap-2">
                   <Bug className="h-6 w-6" />
-                  विश्लेषण परिणाम
+                  {t('pest.analysisResult')}
                 </CardTitle>
               </CardHeader>
               
@@ -129,19 +131,19 @@ const Pest = () => {
                 <div className="space-y-4">
                   <div className="p-4 bg-muted rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold text-primary">पहचान:</h3>
+                      <h3 className="font-semibold text-primary">{t('pest.identification')}</h3>
                       <span className="text-sm bg-primary text-primary-foreground px-2 py-1 rounded">
-                        {analysis.confidence}% विश्वसनीयता
+                        {analysis.confidence}% {t('pest.confidence')}
                       </span>
                     </div>
                     <p className="text-lg font-medium">{analysis.pest}</p>
-                    <p className="text-sm text-muted-foreground">गंभीरता: {analysis.severity}</p>
+                    <p className="text-sm text-muted-foreground">{t('pest.severity')} {analysis.severity}</p>
                   </div>
 
                   <div className="p-4 bg-muted rounded-lg">
                     <h3 className="font-semibold text-primary mb-3 flex items-center gap-2">
                       <AlertCircle className="h-4 w-4" />
-                      उपचार:
+                      {t('pest.treatment')}
                     </h3>
                     <ul className="space-y-2">
                       {analysis.treatment.map((treatment: string, index: number) => (
@@ -154,7 +156,7 @@ const Pest = () => {
                   </div>
 
                   <div className="p-4 bg-muted rounded-lg">
-                    <h3 className="font-semibold text-primary mb-3">रोकथाम:</h3>
+                    <h3 className="font-semibold text-primary mb-3">{t('pest.prevention')}</h3>
                     <ul className="space-y-2">
                       {analysis.prevention.map((prevention: string, index: number) => (
                         <li key={index} className="text-sm flex items-start gap-2">
@@ -166,7 +168,7 @@ const Pest = () => {
                   </div>
 
                   <Button className="w-full bg-gradient-to-r from-primary to-accent">
-                    सलाह सेव करें
+                    {t('pest.saveAdvice')}
                   </Button>
                 </div>
               </CardContent>
@@ -177,7 +179,7 @@ const Pest = () => {
         {!analysis && (
           <Card className="mt-6 shadow-soft">
             <CardHeader>
-              <CardTitle>सामान्य कीट और रोग</CardTitle>
+              <CardTitle>{t('pest.commonPests')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
