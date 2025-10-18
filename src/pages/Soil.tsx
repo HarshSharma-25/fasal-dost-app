@@ -57,11 +57,11 @@ const Soil = () => {
                       <SelectValue placeholder={t('soil.selectSoilType')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="black">{t('soil.blackSoil')}</SelectItem>
-                      <SelectItem value="red">{t('soil.redSoil')}</SelectItem>
-                      <SelectItem value="alluvial">{t('soil.alluvial')}</SelectItem>
-                      <SelectItem value="sandy">{t('soil.sandy')}</SelectItem>
-                      <SelectItem value="clay">{t('soil.clay')}</SelectItem>
+                      <SelectItem value="black">{t('soil.blackSoil')} (Black Soil)</SelectItem>
+                      <SelectItem value="red">{t('soil.redSoil')} (Red Soil)</SelectItem>
+                      <SelectItem value="alluvial">{t('soil.alluvial')} (Alluvial)</SelectItem>
+                      <SelectItem value="sandy">{t('soil.sandy')} (Sandy)</SelectItem>
+                      <SelectItem value="clay">{t('soil.clay')} (Clay)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -73,11 +73,11 @@ const Soil = () => {
                       <SelectValue placeholder={t('soil.selectPreviousCrop')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="wheat">{t('soil.wheat')}</SelectItem>
-                      <SelectItem value="rice">{t('soil.rice')}</SelectItem>
-                      <SelectItem value="cotton">{t('soil.cotton')}</SelectItem>
-                      <SelectItem value="sugarcane">{t('soil.sugarcane')}</SelectItem>
-                      <SelectItem value="soybean">{t('soil.soybean')}</SelectItem>
+                      <SelectItem value="wheat">{t('soil.wheat')} (Wheat)</SelectItem>
+                      <SelectItem value="rice">{t('soil.rice')} (Rice)</SelectItem>
+                      <SelectItem value="cotton">{t('soil.cotton')} (Cotton)</SelectItem>
+                      <SelectItem value="sugarcane">{t('soil.sugarcane')} (Sugarcane)</SelectItem>
+                      <SelectItem value="soybean">{t('soil.soybean')} (Soybean)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -89,11 +89,11 @@ const Soil = () => {
                       <SelectValue placeholder={t('soil.selectNextCrop')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="wheat">{t('soil.wheat')}</SelectItem>
-                      <SelectItem value="rice">{t('soil.rice')}</SelectItem>
-                      <SelectItem value="cotton">{t('soil.cotton')}</SelectItem>
-                      <SelectItem value="vegetables">{t('soil.vegetables')}</SelectItem>
-                      <SelectItem value="pulses">{t('soil.pulses')}</SelectItem>
+                      <SelectItem value="wheat">{t('soil.wheat')} (Wheat)</SelectItem>
+                      <SelectItem value="rice">{t('soil.rice')} (Rice)</SelectItem>
+                      <SelectItem value="cotton">{t('soil.cotton')} (Cotton)</SelectItem>
+                      <SelectItem value="vegetables">{t('soil.vegetables')} (Vegetables)</SelectItem>
+                      <SelectItem value="pulses">{t('soil.pulses')} (Pulses)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
