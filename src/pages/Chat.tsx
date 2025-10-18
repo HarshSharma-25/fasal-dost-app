@@ -4,11 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageCircle, Send, Mic, Volume2, HelpCircle, Phone, MessageSquare } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useToast } from "@/hooks/use-toast";
 
 const Chat = () => {
   const { t } = useLanguage();
+  const { toast } = useToast();
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -18,30 +20,136 @@ const Chat = () => {
     },
   ]);
   const [inputText, setInputText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleSendMessage = () => {
-    if (!inputText.trim()) return;
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
 
+  const streamChat = async (userMessage: string) => {
+    const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
+    
+    const chatMessages = messages
+      .filter(m => m.sender === "user" || m.sender === "bot")
+      .map(m => ({
+        role: m.sender === "user" ? "user" : "assistant",
+        content: m.text,
+      }));
+
+    chatMessages.push({ role: "user", content: userMessage });
+
+    const resp = await fetch(CHAT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+      },
+      body: JSON.stringify({ messages: chatMessages }),
+    });
+
+    if (!resp.ok) {
+      if (resp.status === 429) {
+        toast({
+          title: "Rate limit exceeded",
+          description: "Please try again in a few moments.",
+          variant: "destructive",
+        });
+      } else if (resp.status === 402) {
+        toast({
+          title: "Payment required",
+          description: "Please add credits to your workspace.",
+          variant: "destructive",
+        });
+      }
+      throw new Error("Failed to start stream");
+    }
+
+    if (!resp.body) throw new Error("No response body");
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let textBuffer = "";
+    let streamDone = false;
+    let assistantMessage = "";
+
+    // Add initial empty assistant message
+    const botMessageId = Date.now();
+    setMessages(prev => [...prev, {
+      id: botMessageId,
+      text: "",
+      sender: "bot",
+      timestamp: new Date(),
+    }]);
+
+    while (!streamDone) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      textBuffer += decoder.decode(value, { stream: true });
+
+      let newlineIndex: number;
+      while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
+        let line = textBuffer.slice(0, newlineIndex);
+        textBuffer = textBuffer.slice(newlineIndex + 1);
+
+        if (line.endsWith("\r")) line = line.slice(0, -1);
+        if (line.startsWith(":") || line.trim() === "") continue;
+        if (!line.startsWith("data: ")) continue;
+
+        const jsonStr = line.slice(6).trim();
+        if (jsonStr === "[DONE]") {
+          streamDone = true;
+          break;
+        }
+
+        try {
+          const parsed = JSON.parse(jsonStr);
+          const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+          if (content) {
+            assistantMessage += content;
+            setMessages(prev => prev.map(m => 
+              m.id === botMessageId 
+                ? { ...m, text: assistantMessage }
+                : m
+            ));
+          }
+        } catch {
+          textBuffer = line + "\n" + textBuffer;
+          break;
+        }
+      }
+    }
+  };
+
+  const handleSendMessage = async () => {
+    if (!inputText.trim() || isLoading) return;
+
+    const userMessage = inputText;
     const newMessage = {
-      id: messages.length + 1,
-      text: inputText,
+      id: Date.now(),
+      text: userMessage,
       sender: "user" as const,
       timestamp: new Date(),
     };
 
-    setMessages([...messages, newMessage]);
+    setMessages(prev => [...prev, newMessage]);
     setInputText("");
+    setIsLoading(true);
 
-    // Simulate bot response
-    setTimeout(() => {
-      const botResponse = {
-        id: messages.length + 2,
-        text: t('chat.botThinking'),
-        sender: "bot" as const,
-        timestamp: new Date(),
-      };
-      setMessages(prev => [...prev, botResponse]);
-    }, 1000);
+    try {
+      await streamChat(userMessage);
+    } catch (error) {
+      console.error("Chat error:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -63,7 +171,7 @@ const Chat = () => {
           </CardHeader>
           
           <CardContent className="p-0">
-            <ScrollArea className="h-96 p-4">
+            <ScrollArea className="h-96 p-4" ref={scrollRef}>
               <div className="space-y-4">
                 {messages.map((message) => (
                   <div
