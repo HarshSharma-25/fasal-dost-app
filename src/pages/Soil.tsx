@@ -47,7 +47,7 @@ const Soil = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <Label htmlFor="location">{t('soil.location')}</Label>
-                  <Input id="location" placeholder="जिला, तहसील, गांव" />
+                  <Input id="location" placeholder={t('soil.locationPlaceholder')} />
                 </div>
 
                 <div>
@@ -57,11 +57,11 @@ const Soil = () => {
                       <SelectValue placeholder={t('soil.selectSoilType')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="black">काली मिट्टी (Black Soil)</SelectItem>
-                      <SelectItem value="red">लाल मिट्टी (Red Soil)</SelectItem>
-                      <SelectItem value="alluvial">जलोढ़ मिट्टी (Alluvial)</SelectItem>
-                      <SelectItem value="sandy">बलुई मिट्टी (Sandy)</SelectItem>
-                      <SelectItem value="clay">चिकनी मिट्टी (Clay)</SelectItem>
+                      <SelectItem value="black">{t('soil.blackSoil')}</SelectItem>
+                      <SelectItem value="red">{t('soil.redSoil')}</SelectItem>
+                      <SelectItem value="alluvial">{t('soil.alluvial')}</SelectItem>
+                      <SelectItem value="sandy">{t('soil.sandy')}</SelectItem>
+                      <SelectItem value="clay">{t('soil.clay')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -73,11 +73,11 @@ const Soil = () => {
                       <SelectValue placeholder={t('soil.selectPreviousCrop')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="wheat">गेहूं</SelectItem>
-                      <SelectItem value="rice">धान</SelectItem>
-                      <SelectItem value="cotton">कपास</SelectItem>
-                      <SelectItem value="sugarcane">गन्ना</SelectItem>
-                      <SelectItem value="soybean">सोयाबीन</SelectItem>
+                      <SelectItem value="wheat">{t('soil.wheat')}</SelectItem>
+                      <SelectItem value="rice">{t('soil.rice')}</SelectItem>
+                      <SelectItem value="cotton">{t('soil.cotton')}</SelectItem>
+                      <SelectItem value="sugarcane">{t('soil.sugarcane')}</SelectItem>
+                      <SelectItem value="soybean">{t('soil.soybean')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -89,11 +89,11 @@ const Soil = () => {
                       <SelectValue placeholder={t('soil.selectNextCrop')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="wheat">गेहूं</SelectItem>
-                      <SelectItem value="rice">धान</SelectItem>
-                      <SelectItem value="cotton">कपास</SelectItem>
-                      <SelectItem value="vegetables">सब्जी</SelectItem>
-                      <SelectItem value="pulses">दालें</SelectItem>
+                      <SelectItem value="wheat">{t('soil.wheat')}</SelectItem>
+                      <SelectItem value="rice">{t('soil.rice')}</SelectItem>
+                      <SelectItem value="cotton">{t('soil.cotton')}</SelectItem>
+                      <SelectItem value="vegetables">{t('soil.vegetables')}</SelectItem>
+                      <SelectItem value="pulses">{t('soil.pulses')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

@@ -109,9 +109,9 @@ const Pest = () => {
                 <div className="text-sm text-muted-foreground space-y-2">
                   <p className="font-medium">{t('pest.betterResults')}</p>
                   <ul className="list-disc list-inside space-y-1 ml-2">
-                    <li>साफ और तेज तस्वीर लें</li>
-                    <li>प्रभावित पत्ती या फसल का क्लोज-अप लें</li>
-                    <li>अच्छी रोशनी में फोटो लें</li>
+                    <li>{t('pest.clearPhoto')}</li>
+                    <li>{t('pest.closeup')}</li>
+                    <li>{t('pest.goodLight')}</li>
                   </ul>
                 </div>
               </div>
@@ -184,10 +184,10 @@ const Pest = () => {
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { name: "माहू", treatment: "नीम तेल छिड़काव" },
-                  { name: "सफेद मक्खी", treatment: "पीला चिपचिपा ट्रैप" },
-                  { name: "फली छेदक", treatment: "बीटी स्प्रे" },
-                  { name: "पत्ती धब्बा", treatment: "कॉपर सल्फेट" }
+                  { name: t('pest.aphid'), treatment: t('pest.neemOilSpray') },
+                  { name: t('pest.whitefly'), treatment: t('pest.yellowStickyTrap') },
+                  { name: t('pest.podBorer'), treatment: t('pest.btSpray') },
+                  { name: t('pest.leafSpot'), treatment: t('pest.copperSulfate') }
                 ].map((item, index) => (
                   <div key={index} className="p-3 border rounded-lg text-center hover:bg-muted transition-smooth">
                     <p className="font-medium text-sm">{item.name}</p>
